@@ -1,2 +1,7 @@
 # Pistol-Pete-Shoot-Out
-Pistol Pete Shoot Out goDot files from Fall 2025 Software Development
+Guns Up!: GoDot files from Fall 2025 Software Development
+
+Primary Development:
+- Aaron  Ortiz
+- Nicholas Miller
+- Jonathan Leuenberger
