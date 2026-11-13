@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://yicge48108e0"]
+
+[ext_resource type="Script" uid="uid://bht1da6x17k7" path="res://scripts/game.gd" id="1_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://bwh2ryygpvbyx" path="res://scenes/level1.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://dbtxw1jpbbb5i" path="res://scenes/ui.tscn" id="2_yqjtg"]
+
+[node name="Game" type="Node" groups=["game"]]
+script = ExtResource("1_lnu2h")
+
+[node name="UI" parent="." instance=ExtResource("2_yqjtg")]
+
+[node name="Level 1" parent="." instance=ExtResource("1_uwrxv")]
+
+[node name="PurchaseTimer" type="Timer" parent="."]
+wait_time = 0.75
+
+[connection signal="onEnd" from="Level 1" to="." method="on_level_end"]
+[connection signal="purchase" from="Level 1" to="." method="_on_level_1_purchase"]
+[connection signal="timeout" from="PurchaseTimer" to="." method="_on_purchase_timer_timeout"]

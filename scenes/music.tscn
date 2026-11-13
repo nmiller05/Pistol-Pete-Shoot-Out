@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddv3dr67i2f0h"]
+
+[ext_resource type="AudioStream" uid="uid://wt44d3a7ptsy" path="res://assets/music/pistol_pete_game_(intro).wav" id="1_qnihg"]
+[ext_resource type="Script" uid="uid://bbuqj7pao5tf5" path="res://scripts/music.gd" id="2_ibx2e"]
+[ext_resource type="AudioStream" uid="uid://d3wtrgdwd5du2" path="res://assets/music/pistol_pete_game_(Loop).wav" id="3_qnihg"]
+
+[node name="Music" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_qnihg")
+autoplay = true
+bus = &"Music"
+script = ExtResource("2_ibx2e")
+
+[node name="LoopedSong" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_qnihg")
+bus = &"Music"
+
+[connection signal="finished" from="." to="." method="_on_finished"]

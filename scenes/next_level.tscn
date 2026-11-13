@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7p6xrcgj67s5"]
+
+[ext_resource type="Texture2D" uid="uid://hu2xv6ykodat" path="res://assets/graphics/items/level_2_icon.png" id="1_rf0ph"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_35l6a"]
+size = Vector2(17, 20)
+
+[node name="Next_level" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, -9)
+scale = Vector2(0.75793356, 0.8617237)
+texture = ExtResource("1_rf0ph")
+offset = Vector2(-1.38, -0.825)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_35l6a")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

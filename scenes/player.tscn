@@ -1,0 +1,261 @@
+[gd_scene load_steps=34 format=3 uid="uid://bxsjx3sjsevbp"]
+
+[ext_resource type="Script" uid="uid://byh2t18i0puo8" path="res://scripts/player.gd" id="1_dqkch"]
+[ext_resource type="Texture2D" uid="uid://cwmjwhsxn7w5x" path="res://assets/graphics/player/pixel_pete_idle.png" id="2_dqkch"]
+[ext_resource type="Shader" uid="uid://ting3t2e8wqi" path="res://scripts/flicker.gdshader" id="2_fjrip"]
+[ext_resource type="Texture2D" uid="uid://buobd21t64edm" path="res://assets/graphics/player/pixel_pete_shooting.png" id="4_dqkch"]
+[ext_resource type="Texture2D" uid="uid://bmcqm0gpx5evq" path="res://assets/graphics/player/pixel_pete_running.png" id="4_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://cv4wteud62fmh" path="res://assets/graphics/items/gun/fire1.png" id="5_tuyoq"]
+[ext_resource type="Texture2D" uid="uid://07m38nfnq0is" path="res://assets/graphics/items/gun/fire2.png" id="6_fjrip"]
+[ext_resource type="AudioStream" uid="uid://d4ea2c8mvlekt" path="res://assets/sounds/explosion.wav" id="8_smehm"]
+[ext_resource type="AudioStream" uid="uid://ck38giwxx0ymw" path="res://assets/sounds/hurt.wav" id="9_ur7pv"]
+[ext_resource type="AudioStream" uid="uid://bdqnslun2ykp3" path="res://assets/sounds/jump.wav" id="10_y4r1p"]
+[ext_resource type="AudioStream" uid="uid://dttb802a46gry" path="res://assets/sounds/gun_shot.mp3" id="11_d2wvv"]
+[ext_resource type="AudioStream" uid="uid://dctwm4arqoaln" path="res://assets/sounds/reload.wav" id="12_3v2ag"]
+[ext_resource type="AudioStream" uid="uid://ccq2llqtbravm" path="res://assets/sounds/empty_gun.mp3" id="13_jej6c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_smehm"]
+resource_local_to_scene = true
+shader = ExtResource("2_fjrip")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/amount = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("2_dqkch")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("2_dqkch")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("2_dqkch")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("2_dqkch")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("4_dqkch")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a8ls1"]
+atlas = ExtResource("4_dqkch")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfm1y"]
+atlas = ExtResource("4_dqkch")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fulsm"]
+atlas = ExtResource("4_dqkch")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4r5pv"]
+atlas = ExtResource("4_dqkch")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60mlk"]
+atlas = ExtResource("4_dqkch")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ej7"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oprun"]
+atlas = ExtResource("4_qlg0r")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tuyoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a8ls1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfm1y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fulsm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r5pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60mlk")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wvv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v2ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jej6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1ej7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oprun")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
+size = Vector2(12, 26)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+z_index = 5
+collision_layer = 2
+script = ExtResource("1_dqkch")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_smehm")
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_tuyoq")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+shape = SubResource("RectangleShape2D_qhqgy")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.5, 3.5)
+limit_bottom = 48
+position_smoothing_enabled = true
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="SecondShotTimer" type="Timer" parent="Timers"]
+wait_time = 0.125
+one_shot = true
+
+[node name="CooldownTimer" type="Timer" parent="Timers"]
+wait_time = 0.6
+one_shot = true
+
+[node name="FireTimer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="InvincibilityTimer" type="Timer" parent="Timers"]
+wait_time = 0.6
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="Timers"]
+
+[node name="Fire" type="Node2D" parent="."]
+
+[node name="FireLeft1" type="Sprite2D" parent="Fire"]
+visible = false
+position = Vector2(-16.5, -14.5)
+texture = ExtResource("5_tuyoq")
+flip_h = true
+
+[node name="FireRight1" type="Sprite2D" parent="Fire"]
+visible = false
+position = Vector2(16.5, -14.5)
+texture = ExtResource("5_tuyoq")
+
+[node name="FireLeft2" type="Sprite2D" parent="Fire"]
+visible = false
+position = Vector2(-8.5, -13.5)
+texture = ExtResource("6_fjrip")
+flip_h = true
+
+[node name="FireRight2" type="Sprite2D" parent="Fire"]
+visible = false
+position = Vector2(8.5, -13.5)
+texture = ExtResource("6_fjrip")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Death" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("8_smehm")
+bus = &"SFX"
+
+[node name="Damage" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("9_ur7pv")
+bus = &"SFX"
+
+[node name="Jump" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("10_y4r1p")
+volume_db = -12.0
+bus = &"SFX"
+
+[node name="GunShot" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("11_d2wvv")
+
+[node name="Reload" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("12_3v2ag")
+
+[node name="EmptyGun" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("13_jej6c")
+
+[connection signal="timeout" from="Timers/SecondShotTimer" to="." method="_on_wait_timer_timeout"]
+[connection signal="timeout" from="Timers/CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="Timers/FireTimer" to="." method="_on_fire_timer_timeout"]
+[connection signal="timeout" from="Timers/InvincibilityTimer" to="." method="_on_invincibility_timer_timeout"]
+[connection signal="timeout" from="Timers/DeathTimer" to="." method="_on_death_timer_timeout"]

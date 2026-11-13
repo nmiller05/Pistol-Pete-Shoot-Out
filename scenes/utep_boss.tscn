@@ -1,0 +1,204 @@
+[gd_scene load_steps=31 format=3 uid="uid://cs0pluwl1nalg"]
+
+[ext_resource type="Script" uid="uid://bsr3x63qn01gv" path="res://scripts/utep_boss.gd" id="1_1i7ud"]
+[ext_resource type="Texture2D" uid="uid://b1pfod2u1r8dw" path="res://assets/graphics/enemies/utep_boss.png" id="1_wv0l7"]
+[ext_resource type="Shader" uid="uid://ting3t2e8wqi" path="res://scripts/flicker.gdshader" id="2_6m3sx"]
+[ext_resource type="Texture2D" uid="uid://70qhehcigq4n" path="res://assets/graphics/enemies/utep_boss_throwing.png" id="3_75gpx"]
+[ext_resource type="Script" uid="uid://ctvfi4ni0m338" path="res://scripts/state_machine.gd" id="3_yarjl"]
+[ext_resource type="Script" uid="uid://c4upa77fspkm5" path="res://scripts/enemy_idle.gd" id="4_yarjl"]
+[ext_resource type="Script" uid="uid://bvglgn0bbjd00" path="res://scripts/enemy_follow.gd" id="5_rs6k2"]
+[ext_resource type="Texture2D" uid="uid://d0jypxoao2prs" path="res://assets/graphics/enemies/utep_boss_walking.png" id="5_x2wiy"]
+[ext_resource type="Script" uid="uid://7pra5a2rqaba" path="res://scripts/enemy_attack.gd" id="6_cpujk"]
+[ext_resource type="PackedScene" uid="uid://be7lewt44k85j" path="res://scenes/utep_boss_pickaxe.tscn" id="7_6m3sx"]
+[ext_resource type="AudioStream" uid="uid://ctnxs3e1rw65m" path="res://assets/sounds/j_scream.wav" id="11_2urqe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_75gpx"]
+shader = ExtResource("2_6m3sx")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/amount = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2wiy"]
+atlas = ExtResource("3_75gpx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2urqe"]
+atlas = ExtResource("3_75gpx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wohl1"]
+atlas = ExtResource("3_75gpx")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xhv1"]
+atlas = ExtResource("3_75gpx")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tlgn"]
+atlas = ExtResource("3_75gpx")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_au3jl"]
+atlas = ExtResource("3_75gpx")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spu0c"]
+atlas = ExtResource("3_75gpx")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsp3d"]
+atlas = ExtResource("3_75gpx")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rs6k2"]
+atlas = ExtResource("1_wv0l7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scn8k"]
+atlas = ExtResource("1_wv0l7")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsiyl"]
+atlas = ExtResource("5_x2wiy")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdw4b"]
+atlas = ExtResource("5_x2wiy")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smbm0"]
+atlas = ExtResource("5_x2wiy")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ph2qr"]
+atlas = ExtResource("5_x2wiy")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwfc5"]
+atlas = ExtResource("5_x2wiy")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7m1m3"]
+atlas = ExtResource("5_x2wiy")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cpujk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2wiy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2urqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wohl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xhv1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tlgn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au3jl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spu0c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsp3d")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 11.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rs6k2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scn8k")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsiyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdw4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smbm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ph2qr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwfc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7m1m3")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yarjl"]
+size = Vector2(20, 31)
+
+[node name="UTEP_Boss" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 17
+script = ExtResource("1_1i7ud")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_75gpx")
+sprite_frames = SubResource("SpriteFrames_cpujk")
+animation = &"Walk"
+autoplay = "Idle"
+frame_progress = 0.38915873
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 4
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_yarjl")
+
+[node name="State Machine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_yarjl")
+initial_state = NodePath("Follow")
+
+[node name="Idle" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("4_yarjl")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://c4upa77fspkm5"
+
+[node name="Follow" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("5_rs6k2")
+enemy = NodePath("../..")
+metadata/_custom_type_script = "uid://bvglgn0bbjd00"
+
+[node name="Attack" type="Node" parent="State Machine" node_paths=PackedStringArray("enemy")]
+script = ExtResource("6_cpujk")
+enemy = NodePath("../..")
+projectile_scene = ExtResource("7_6m3sx")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+light_mask = 4
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_yarjl")
+
+[node name="Scream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_2urqe")
+
+[node name="DeathTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

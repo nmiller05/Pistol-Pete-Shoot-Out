@@ -1,0 +1,107 @@
+[gd_scene load_steps=14 format=3 uid="uid://dcoahack02r74"]
+
+[ext_resource type="Script" uid="uid://8vpsjif0urfr" path="res://scripts/utep.gd" id="1_n6pvg"]
+[ext_resource type="Shader" uid="uid://ting3t2e8wqi" path="res://scripts/flicker.gdshader" id="2_s072c"]
+[ext_resource type="Texture2D" uid="uid://cc61mmar818is" path="res://assets/graphics/enemies/hard_crab.png" id="3_s072c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_350x0"]
+resource_local_to_scene = true
+shader = ExtResource("2_s072c")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/amount = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_350x0"]
+atlas = ExtResource("3_s072c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m02jt"]
+atlas = ExtResource("3_s072c")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wddq"]
+atlas = ExtResource("3_s072c")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bumt"]
+atlas = ExtResource("3_s072c")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45th4"]
+atlas = ExtResource("3_s072c")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2o4gs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_350x0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m02jt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wddq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bumt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45th4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 13.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2xjuo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_si4jb"]
+size = Vector2(32, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f14jl"]
+size = Vector2(3, 3)
+
+[node name="UTEP" type="Area2D"]
+collision_layer = 4
+collision_mask = 19
+script = ExtResource("1_n6pvg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_350x0")
+position = Vector2(0, -16)
+sprite_frames = SubResource("SpriteFrames_2o4gs")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_2xjuo")
+
+[node name="BorderArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderArea"]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_si4jb")
+
+[node name="RightCliffArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 17
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightCliffArea"]
+position = Vector2(17.5, 3)
+shape = SubResource("RectangleShape2D_f14jl")
+
+[node name="LeftCliffArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 17
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LeftCliffArea"]
+position = Vector2(-17.5, 3)
+shape = SubResource("RectangleShape2D_f14jl")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="BorderArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="RightCliffArea" to="." method="_on_right_cliff_area_body_exited"]
+[connection signal="body_exited" from="LeftCliffArea" to="." method="_on_left_cliff_area_body_exited"]
